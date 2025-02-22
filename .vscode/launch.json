@@ -1,0 +1,24 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Run Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "Run Demo",
+            "request": "launch",
+            "mainClass": "Demo",
+            "projectName": "IntroToUnitTesting"
+        },
+        {
+            "type": "java",
+            "name": "Run JUnit Tests",
+            "request": "test",
+            "projectName": "IntroToUnitTesting"
+        }
+    ]
+}
