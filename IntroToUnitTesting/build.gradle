@@ -1,21 +1,24 @@
+/*
+ * Gradle build file.
+ */
+
 apply plugin: 'java'
 
-// Java 8을 강제하도록 설정
-if (JavaVersion.current() != JavaVersion.VERSION_1_8)
-    throw new GradleException("This project requires Java 8, but it's running on " + JavaVersion.current())
+// Make sure we are using Java 8.
+if(JavaVersion.current() != JavaVersion.VERSION_1_8)
+    throw new GradleException("This project requires Java 8, but it's running on "+JavaVersion.current())
 
 sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
 
+
 repositories {
+    //jcenter()
     mavenCentral()
 }
 
 dependencies {
-    // JUnit 5 사용
-    testImplementation 'org.junit.jupiter:junit-jupiter:5.8.2'
+    // Use JUnit test framework
+    testImplementation 'junit:junit:4.12'
 }
 
-tasks.withType(Test).configureEach {
-    useJUnitPlatform()
-}

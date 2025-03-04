@@ -1,20 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="DemoTest" tests="14" skipped="0" failures="0" errors="0" timestamp="2025-02-22T14:24:18" hostname="DESKTOP-48F31TE" time="0.02">
+<testsuite name="DemoTest" tests="19" skipped="0" failures="0" errors="0" timestamp="2025-03-04T12:42:52" hostname="DESKTOP-48F31TE" time="0.006">
   <properties/>
-  <testcase name="onezerosides()" classname="DemoTest" time="0.012"/>
-  <testcase name="Isosceles()" classname="DemoTest" time="0.001"/>
-  <testcase name="threezerosides()" classname="DemoTest" time="0.001"/>
-  <testcase name="invalidtriangledouble()" classname="DemoTest" time="0.001"/>
-  <testcase name="negativesides()" classname="DemoTest" time="0.0"/>
-  <testcase name="equilateral()" classname="DemoTest" time="0.0"/>
-  <testcase name="validtriangle3()" classname="DemoTest" time="0.001"/>
-  <testcase name="validtriangle4()" classname="DemoTest" time="0.0"/>
-  <testcase name="validtriangle5()" classname="DemoTest" time="0.001"/>
-  <testcase name="validtriangle90()" classname="DemoTest" time="0.0"/>
-  <testcase name="invalidtriangle1()" classname="DemoTest" time="0.001"/>
-  <testcase name="invalidtriangle2()" classname="DemoTest" time="0.0"/>
-  <testcase name="invalidtriangle100()" classname="DemoTest" time="0.001"/>
-  <testcase name="largesides()" classname="DemoTest" time="0.0"/>
-  <system-out><![CDATA[]]></system-out>
+  <testcase name="onezerosides" classname="DemoTest" time="0.001"/>
+  <testcase name="invalidtriangledouble1" classname="DemoTest" time="0.0"/>
+  <testcase name="invalidtriangledouble2" classname="DemoTest" time="0.0"/>
+  <testcase name="invalidtriangledouble3" classname="DemoTest" time="0.0"/>
+  <testcase name="verysmall" classname="DemoTest" time="0.0"/>
+  <testcase name="threezerosides" classname="DemoTest" time="0.0"/>
+  <testcase name="negativesides" classname="DemoTest" time="0.0"/>
+  <testcase name="testMainMethod" classname="DemoTest" time="0.003"/>
+  <testcase name="equilateral" classname="DemoTest" time="0.0"/>
+  <testcase name="validtriangle3" classname="DemoTest" time="0.0"/>
+  <testcase name="validtriangle4" classname="DemoTest" time="0.0"/>
+  <testcase name="validtriangle5" classname="DemoTest" time="0.0"/>
+  <testcase name="validtriangle90" classname="DemoTest" time="0.0"/>
+  <testcase name="invalidtriangle1" classname="DemoTest" time="0.0"/>
+  <testcase name="invalidtriangle2" classname="DemoTest" time="0.0"/>
+  <testcase name="isosceles" classname="DemoTest" time="0.0"/>
+  <testcase name="invalidtriangle100" classname="DemoTest" time="0.0"/>
+  <testcase name="onetwothree" classname="DemoTest" time="0.0"/>
+  <testcase name="largesides" classname="DemoTest" time="0.0"/>
+  <system-out><![CDATA[Enter side 1: 
+Enter side 2: 
+Enter side 3: 
+This is a triangle.
+]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
