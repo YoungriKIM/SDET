@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="DemoTest" tests="19" skipped="0" failures="0" errors="0" timestamp="2025-03-04T12:42:52" hostname="DESKTOP-48F31TE" time="0.006">
+<testsuite name="DemoTest" tests="19" skipped="0" failures="0" errors="0" timestamp="2025-03-04T12:38:05" hostname="DESKTOP-48F31TE" time="0.007">
   <properties/>
-  <testcase name="onezerosides" classname="DemoTest" time="0.001"/>
+  <testcase name="onezerosides" classname="DemoTest" time="0.002"/>
   <testcase name="invalidtriangledouble1" classname="DemoTest" time="0.0"/>
   <testcase name="invalidtriangledouble2" classname="DemoTest" time="0.0"/>
   <testcase name="invalidtriangledouble3" classname="DemoTest" time="0.0"/>
