@@ -1,20 +1,23 @@
 from flask import Flask, jsonify
 import threading
 import time
+import random
 import requests
 from concurrent.futures import ThreadPoolExecutor
+import logging
 
-# 1 | Flask 서버 설정
+# Flask 기본 로그를 최소화 (INFO 이상 로그만 출력)
+log = logging.getLogger('werkzeug')
+log.setLevel(logging.WARNING)  # WARNING 이상만 출력 (ERROR만 보고 싶다면 'ERROR'로 변경)
+
+# ---------------------------------------------------------------------------------
+# 1 | Flask 서버 설정 및 API 만들기
 app = Flask(__name__)
 
-@app.route('/fast') # 즉시 응답하는 엔드포인트
-def fast_response():
-    return jsonify({"message": "빠른 응답!"})
-
-@app.route('/slow')
-def slow_response():
-    time.sleep(1) # 1초의 응답 지연
-    return jsonify({"message": "1초가 소요되는 응답!"})
+@app.route('/test')  # 테스트용 엔드포인트
+def test_response():
+    time.sleep(0.5)  # 응답 지연 추가 (0.5초)
+    return jsonify({"message": "테스트 응답 완료!"})
 
 def run_server(): # 서버 실행
     app.run(debug=True, use_reloader=False, port=5000)
@@ -25,15 +28,15 @@ server_thread = threading.Thread(target=run_server, daemon=True)
 server_thread.start()
 
 # ---------------------------------------------------------------------------------
-# 3 | 성능 테스트 코드(부하 테스트)
-FAST_URL = "http://127.0.0.1:5000/fast" # 테스트 할 API
-SLOW_URL = "http://127.0.0.1:5000/slow" # 테스트 할 API
-NUM_REQUESTS = 24 # 보낼 요청 수
-CONCURRENT_REQUESTS = 10 # 동시 요청 개수
+# 3 | 부하 테스트 코드 (점진적 부하 증가)
+TEST_URL = "http://127.0.0.1:5000/test"  # 테스트할 API
+MAX_CONCURRENT_REQUESTS = 50  # 최대 동시 요청 개수
+STEP = 10  # 한 단계씩 증가할 요청 개수
+TOTAL_REQUESTS = 100  # 전체 요청 개수
 
-def send_request(URL):
+def send_request():
     start_time = time.time()
-    response = requests.get(URL)
+    response = requests.get(TEST_URL)
     end_time = time.time()
     
     return response.status_code, round(end_time - start_time, 2)
@@ -42,18 +45,16 @@ def send_request(URL):
 time.sleep(1)
 
 # ---------------------------------------------------------------------------------
-# 병렬 요청 실행 - fast
-print("# /fast API 성능 테스트 시작")
-with ThreadPoolExecutor(max_workers=CONCURRENT_REQUESTS) as executor:
-    results = list(executor.map(send_request, [FAST_URL] * NUM_REQUESTS))
-# 결과 출력
-for i, (status, duration) in enumerate(results):
-    print(f"Request {i+1}: Status {status}, Response time {duration}s")
+# 점진적으로 부하 증가시키면서 테스트
+print("\n# 점진적 부하 테스트 시작!")
+for concurrent_requests in range(STEP, MAX_CONCURRENT_REQUESTS + 1, STEP):
+    print(f"\n동시 요청 개수: {concurrent_requests}")
     
-# 병렬 요청 실행 - slow
-print("# /slow API 성능 테스트 시작")
-with ThreadPoolExecutor(max_workers=CONCURRENT_REQUESTS) as executor:
-    results = list(executor.map(send_request, [SLOW_URL] * NUM_REQUESTS))
-# 결과 출력
-for i, (status, duration) in enumerate(results):
-    print(f"Request {i+1}: Status {status}, Response time {duration}s")
+    with ThreadPoolExecutor(max_workers=concurrent_requests) as executor:
+        results = list(executor.map(lambda _: send_request(), range(TOTAL_REQUESTS)))
+
+    # 결과 출력
+    avg_response_time = sum(duration for _, duration in results) / len(results)
+    print(f"평균 응답 시간: {avg_response_time:.2f}s")
+
+print("\n부하 테스트 완료!")
