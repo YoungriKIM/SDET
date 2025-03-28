@@ -2,6 +2,7 @@
 import requests
 
 def test_product_list_contains_item():
+    # 상품 정보 가져오기(GET)
     store_url = "https://fakestoreapi.com/products"
     res = requests.get(store_url)
     
